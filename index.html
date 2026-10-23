@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>try{var t=JSON.parse(localStorage.getItem('theme_pref'));document.documentElement.dataset.theme=t||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')}catch(e){}</script>
+<title>Perficient Latin America: respuesta inmediata a ataques y filtraciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,500..900&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<!-- CDN de Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="#" aria-label="Perficient Latin America, inicio">Perficient Latin America</a>
+  <nav id="pubnav" aria-label="Principal">
+    <a href="#funciones">Funciones</a>
+    <a href="#planes">Planes</a>
+    <a href="#faq">Preguntas</a>
+    <button class="btn ghost theme-btn" type="button">Modo oscuro</button>
+    <button class="btn ghost" type="button" data-open="login">Iniciar sesión</button>
+    <button class="btn" type="button" data-open="sub">Empezar</button>
+  </nav>
+  <div id="appnav" hidden>
+    <span id="user" class="user"></span>
+    <button class="btn ghost theme-btn" type="button">Modo oscuro</button>
+    <button class="btn ghost" type="button" id="logout">Salir</button>
+  </div>
+</header>
+
+<!-- FASE 1: LANDING -->
+<main id="landing">
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>Te están atacando. En 60 segundos sabes qué pasa y qué hacer.</h1>
+      <p>Atalaya vigila tus cuentas, correos y dispositivos. Cuando algo falla, te muestra quién es, qué está en riesgo y te deja cortar el ataque con un toque.</p>
+      <div class="cta-row">
+        <button class="btn" type="button" data-open="sub">Proteger mi cuenta</button>
+        <button class="btn alert" type="button" data-open="sub" data-urgent="1">Me están atacando ahora</button>
+      </div>
+    </div>
+    <aside class="demo" aria-label="Ejemplo de alerta">
+      <p class="demo-state"><span class="dot"></span>Incidente crítico en curso</p>
+      <p class="demo-time" id="demo-time">00:00</p>
+      <p class="demo-lbl">desde la detección</p>
+      <h2>Acceso no autorizado a tu correo corporativo</h2>
+      <dl>
+        <dt>Origen</dt><dd>IP 185.220.101.47, Rumania</dd>
+        <dt>En riesgo</dt><dd>Correo y archivos compartidos</dd>
+        <dt>Recomendado</dt><dd>Cerrar todas las sesiones</dd>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="band">
+    <h2>Esto le pasa a quien no estaba mirando</h2>
+    <div class="cols3">
+      <p><strong>Hiciste clic en un correo falso.</strong> Ya entregaste tu clave y no sabes qué cuentas quedan expuestas.</p>
+      <p><strong>Tus datos aparecen en una filtración.</strong> Alguien los vende y tú te enteras semanas después.</p>
+      <p><strong>Alguien entra desde otro país.</strong> Está leyendo tu correo mientras tú trabajas.</p>
+    </div>
+  </section>
+
+  <section id="funciones" class="wrap">
+    <h2>Lo que hace cuando algo sale mal</h2>
+    <dl class="features">
+      <div><dt>Detecta</dt><dd>Revisa filtraciones, accesos inusuales, phishing y cambios sospechosos en tus cuentas.</dd></div>
+      <div><dt>Te avisa donde estés</dt><dd>Notificación, SMS y llamada. Si no respondes, avisa a tu contacto de emergencia.</dd></div>
+      <div><dt>Te explica</dt><dd>Qué pasó, quién lo origina, qué datos están en riesgo y cuánta urgencia hay, en lenguaje claro.</dd></div>
+      <div><dt>Te deja actuar</dt><dd>Cierra sesiones, cambia claves, bloquea al atacante y aísla dispositivos con un toque.</dd></div>
+      <div><dt>Te guía</dt><dd>Pasos ordenados según el tipo de ataque, para no improvisar bajo presión.</dd></div>
+      <div><dt>Deja evidencia</dt><dd>Cronología completa y un informe descargable para tu empresa, tu aseguradora o una denuncia.</dd></div>
+    </dl>
+  </section>
+
+  <section id="planes" class="band">
+    <h2>Planes</h2>
+    <div class="plans">
+      <article>
+        <h3>Personal</h3>
+        <p class="price">9 USD <span>al mes</span></p>
+        <p>Hasta 3 correos y 2 dispositivos.</p>
+        <button class="btn" type="button" data-open="sub" data-plan="Personal">Elegir Personal</button>
+      </article>
+      <article class="pick">
+        <h3>Equipo</h3>
+        <p class="price">39 USD <span>al mes</span></p>
+        <p>Hasta 10 personas, alertas compartidas y escalamiento.</p>
+        <button class="btn" type="button" data-open="sub" data-plan="Equipo">Elegir Equipo</button>
+      </article>
+      <article>
+        <h3>Empresa</h3>
+        <p class="price">A medida</p>
+        <p>Dominios propios, integraciones y soporte 24/7.</p>
+        <button class="btn ghost" type="button" data-open="sub" data-plan="Empresa">Hablar con ventas</button>
+      </article>
+    </div>
+  </section>
+
+  <section id="faq" class="wrap narrow">
+    <h2>Preguntas frecuentes</h2>
+    <details><summary>¿Ven mis contraseñas?</summary><p>No. Comparamos huellas cifradas con bases de filtraciones y nunca guardamos tus claves.</p></details>
+    <details><summary>¿Qué pasa si ya me atacaron?</summary><p>Entra por el botón de urgencia. El registro es mínimo y el primer paso es cortar el acceso del atacante.</p></details>
+    <details><summary>¿Puedo cancelar cuando quiera?</summary><p>Sí. Cancelas desde Configuración y conservas tus informes.</p></details>
+  </section>
+
+  <footer class="foot">
+    <p>Perficient Latin America. Privacidad, términos y estado del servicio.</p>
+  </footer>
+</main>
+
+<!-- FASE 2: DASHBOARD -->
+<div id="app" class="app" hidden>
+  <aside class="side">
+    <nav aria-label="Panel">
+      <button type="button" data-view="resumen" class="on">Resumen</button>
+      <button type="button" data-view="activos">Activos protegidos</button>
+      <button type="button" data-view="historial">Historial</button>
+    </nav>
+    <button class="btn ghost sim" type="button" id="sim">Simular ataque</button>
+  </aside>
+
+  <section class="main">
+    <!-- Resumen: modo normal -->
+    <div id="view-resumen" class="view">
+      <div id="normal">
+        <p class="status ok">Todo en orden. Vigilamos 3 correos, 1 dominio y 2 dispositivos.</p>
+        <h1>Resumen</h1>
+        <p class="score"><strong>86</strong> de 100 en salud de seguridad</p>
+        <h2>Para mejorar</h2>
+        <ul class="plain">
+          <li>Activa la verificación en dos pasos en tu correo personal.</li>
+          <li>Actualiza el sistema de tu portátil de oficina.</li>
+        </ul>
+        <h2>Actividad reciente</h2>
+        <ul class="plain" id="activity">
+          <li>Hoy 08:12, inicio de sesión desde Bogotá en tu portátil.</li>
+          <li>Ayer 19:40, revisión de filtraciones sin hallazgos.</li>
+        </ul>
+      </div>
+
+      <!-- Resumen: modo incidente -->
+      <div id="incident" hidden>
+        <div class="banner" role="alert">
+          <div>
+            <p class="b-state">Incidente crítico en curso</p>
+            <h1 id="inc-title"></h1>
+          </div>
+          <p class="b-time"><span id="inc-timer">00:00</span><small>desde la detección</small></p>
+        </div>
+
+        <div class="grid">
+          <div class="what">
+            <h2>Qué está pasando</h2>
+            <p id="inc-what"></p>
+            <h2>Quién</h2>
+            <dl id="inc-who"></dl>
+            <h2>Qué está en riesgo</h2>
+            <ul class="plain" id="inc-risk"></ul>
+            <p class="meter-l">Riesgo actual: <strong id="risk-label">Crítico</strong></p>
+            <div class="meter"><span id="risk-bar"></span></div>
+          </div>
+
+          <div class="acts">
+            <h2>Acciones inmediatas</h2>
+            <ul id="actions" class="plain"></ul>
+            <div class="end-row">
+              <button class="btn" type="button" id="contain" disabled>Marcar como contenido</button>
+              <button class="btn ghost" type="button" id="export">Descargar informe</button>
+            </div>
+            <p class="hint" id="contain-hint">Completa al menos 3 acciones para cerrar el incidente.</p>
+          </div>
+        </div>
+
+        <h2>Cronología</h2>
+        <ol id="timeline" class="timeline"></ol>
+      </div>
+    </div>
+
+    <div id="view-activos" class="view" hidden>
+      <h1>Activos protegidos</h1>
+      <table>
+        <thead><tr><th scope="col">Activo</th><th scope="col">Tipo</th><th scope="col">Estado</th></tr></thead>
+        <tbody>
+          <tr><td>ana@empresa.co</td><td>Correo</td><td>Protegido</td></tr>
+          <tr><td>ventas@empresa.co</td><td>Correo</td><td>Protegido</td></tr>
+          <tr><td>empresa.co</td><td>Dominio</td><td>Protegido</td></tr>
+          <tr><td>Portátil de oficina</td><td>Dispositivo</td><td>Actualización pendiente</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="view-historial" class="view" hidden>
+      <h1>Historial</h1>
+      <ul class="plain" id="hist"></ul>
+    </div>
+  </section>
+</div>
+
+<!-- Acceso y pago -->
+<dialog id="auth" aria-labelledby="auth-title">
+  <button class="x" type="button" id="auth-close" aria-label="Cerrar">Cerrar</button>
+  <h2 id="auth-title">Acceso</h2>
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" data-tab="login">Iniciar sesión</button>
+    <button type="button" role="tab" data-tab="sub">Crear cuenta</button>
+  </div>
+  <p id="auth-err" class="err" role="alert" hidden></p>
+
+  <form id="f-login" novalidate>
+    <label>Correo<input name="email" type="email" autocomplete="username" required></label>
+    <label>Contraseña<input name="pass" type="password" autocomplete="current-password" required></label>
+    <button class="btn" type="submit">Entrar</button>
+    <p class="swap">¿No tienes cuenta? <button class="link" type="button" data-goto="sub">Crear cuenta</button></p>
+  </form>
+
+  <form id="f-sub" novalidate hidden>
+    <label>Plan
+      <select name="plan"><option>Personal</option><option>Equipo</option><option>Empresa</option></select>
+    </label>
+    <label>Correo<input name="email" type="email" autocomplete="username" required></label>
+    <label>Contraseña (mínimo 8 caracteres)<input name="pass" type="password" autocomplete="new-password" required></label>
+    <p class="hint">Pago simulado en esta versión. En producción lo procesa tu pasarela y el servidor confirma la suscripción antes de dar acceso.</p>
+    <button class="btn" type="submit">Crear cuenta</button>
+    <p class="swap">¿Ya tienes cuenta? <button class="link" type="button" data-goto="login">Iniciar sesión</button></p>
+  </form>
+</dialog>
+
+<p id="toast" class="toast" role="status" aria-live="polite" hidden></p>
+
+<script src="app.js"></script>
+</body>
+</html>
