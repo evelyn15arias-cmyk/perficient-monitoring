@@ -10,7 +10,7 @@ Bienvenido al proyecto PSL.
 
 ## Descripción
 
-PSL es una página de advertencia diseñada para mostrar información visual al usuario.
+PSL es una página de advertencia diseñada para mostrar información visual al usuario cuando su informacion este en riego de perdida, daño o robo.
 
 ##Imagen de apariencia
 
