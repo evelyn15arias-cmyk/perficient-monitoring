@@ -6,7 +6,7 @@ Bienvenido al proyecto PSL.
 
 ## Imagen principal
 
-![Imagen de PSL](images/psl.png)
+![Imagen de PSL](IMG-20261028-WA0009.jpg)
 
 ## Descripción
 
