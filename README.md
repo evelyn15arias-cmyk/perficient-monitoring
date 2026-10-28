@@ -17,3 +17,5 @@ PSL es una página de advertencia diseñada para mostrar información visual al 
 ![Imagen de PSL](Screenshot_20261028_123431_Gallery.jpg)
 
 ![Imagen de PSL](Screenshot_20261028_123425_Gallery.jpg)
+
+![Imagen de PSL](Screenshot_20261028_123554_Gallery.jpg)
